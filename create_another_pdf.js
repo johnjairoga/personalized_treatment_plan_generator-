@@ -1,0 +1,49 @@
+import fs from "fs";
+
+const pdfContent = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 200 >>
+stream
+BT
+/F1 12 Tf
+50 750 Td
+(Advanced PRP Treatment Plan) Tj
+0 -20 Td
+(Patient: Sarah Johnson) Tj
+0 -20 Td
+(Treatment: Platelet Rich Plasma) Tj
+0 -20 Td
+(Injections: 3 sessions, 2 weeks apart) Tj
+0 -20 Td
+(Total Investment: 2500) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f
+0000000009 00000 n
+0000000058 00000 n
+0000000115 00000 n
+0000000229 00000 n
+0000000480 00000 n
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+569
+%%EOF`;
+
+fs.writeFileSync("test_prp.pdf", pdfContent);
+console.log("PRP test PDF created");

@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "serverlessFunctionRegion": "iad1",
+  "functions": {
+    "app/api/generate/route.ts": {
+      "maxDuration": 60,
+      "memory": 3008
+    }
+  }
+}

@@ -1,0 +1,166 @@
+
+> personalized_treatment_plan_generator-@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.105:3000
+- Environments: .env.local
+✓ Ready in 742ms
+
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
+                        hidden={true}
+-                       bis_skin_checked="1"
+                      >
+                    ...
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+                          className="outfit_8778cd42-module__wRojWG__variable reenie_beanie_2db16b0e-module__LQBYpG__v..."
+-                         data-scribe-recorder-ready="true"
+                        >
+                          <body
++                           className="relative min-h-screen font-outfit"
+-                           className="relative min-h-screen font-outfit gl-new-layout"
+-                           __processed_94371356-d3c9-43bf-9424-a218cd2a6a0f__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            <div
+                              className="relative z-10"
+-                             bis_skin_checked="1"
+                            >
+                              ...
+                                <SegmentViewNode type="page" pagePath="page.tsx">
+                                  <SegmentTrieNode>
+                                  <Home>
+                                    <div
+                                      className="min-h-screen flex flex-col items-center justify-center px-6 relative ..."
+                                      style={{backgroundColor:"#FDFCF8"}}
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+                                        className="absolute -top-20 -right-20 w-72 h-72 rounded-full blur-[120px] opac..."
+                                        style={{background:"#FFE4E1"}}
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full blur-[120px] op..."
+                                        style={{background:"#E6E6FA"}}
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="relative z-10 w-full max-w-2xl space-y-8"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <div
+                                          className="text-center space-y-4"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <div
+                                            className="flex justify-center mb-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="w-12 h-12 rounded-full flex items-center justify-center flex-..."
+                                              style={{backgroundColor:"#FFB7B2"}}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="w-2 h-2 rounded-full bg-white"
+-                                               bis_skin_checked="1"
+                                              >
+                                          ...
+                                        <div
+                                          className="pt-4"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <UploadForm>
+                                            <div
+                                              className="w-full space-y-4"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="space-y-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  onKeyDown={function}
+                                                  onFocus={function}
+                                                  onBlur={function}
+                                                  onClick={function}
+                                                  onDragEnter={function}
+                                                  onDragOver={function}
+                                                  onDragLeave={function}
+                                                  onDrop={function}
+                                                  role="presentation"
+                                                  ref={{current:null}}
+                                                  tabIndex={0}
+                                                  className="p-12 text-center cursor-pointer transition-all duration-3..."
+                                                  style={{borderColor:"rgba(41, 3...",backgroundColor:"white",boxShadow:"0 4px ..."}}
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <input>
+                                                  <div
+                                                    className="space-y-4"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="text-5xl"
+-                                                     bis_skin_checked="1"
+                                                    >
++                                                     📄
+                                                    <div
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                    ...
+                                                ...
+                                ...
+                  ...
+ 
+    at <unknown> (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3439:25)
+    at runWithFiberInDEV (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at emitPendingHydrationWarnings (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3438:13)
+    at completeWork (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6885:102)
+    at runWithFiberInDEV (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:131)
+    at completeUnitOfWork (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64) (file://C:/Users/JOHN/Desktop/JohnJairo/ArtificialCtrl/Tom/personalized_treatment_plan_generator-/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3439:25)
+○ Compiling / ...
+ GET / 200 in 6.3s (next.js: 5.6s, application-code: 766ms)
+ GET /p/david-letourneau-gywqVF 404 in 9.2s (next.js: 8.1s, application-code: 1168ms)
+✓ Finished writing to filesystem cache in 13.4s
+[?25h
