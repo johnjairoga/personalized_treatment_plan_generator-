@@ -102,20 +102,12 @@ export async function POST(request: Request) {
     let extractedText = "";
 
     try {
-      const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
-      const getDocument = pdfjsLib.default.getDocument;
+      const pdfParse = await import("pdf-parse");
+      const PDFParse = pdfParse.default;
 
-      const pdf = await getDocument({ data: uint8Array }).promise;
-      const pages = [];
-
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
-        const pageText = textContent.items.map((item: any) => item.str).join(" ");
-        pages.push(pageText);
-      }
-
-      extractedText = pages.join("\n");
+      const parser = new PDFParse({ data: Buffer.from(uint8Array), max: 0 });
+      const pdfData = await parser.text();
+      extractedText = pdfData || "";
     } catch (extractError) {
       console.error("PDF extraction error:", extractError);
       throw new Error("Could not extract readable text from PDF. Ensure it is a valid text-based PDF.");
