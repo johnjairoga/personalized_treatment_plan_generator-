@@ -98,7 +98,6 @@ export async function POST(request: Request) {
     // Extract PDF text using PDF.co API
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    const base64PDF = buffer.toString("base64");
 
     let extractedText = "";
 
@@ -108,25 +107,47 @@ export async function POST(request: Request) {
         throw new Error("PDF.co API key not configured");
       }
 
-      const response = await fetch("https://api.pdf.co/v1/pdf/convert/to/text", {
+      // Step 1: Upload file to PDF.co to get temporary URL
+      const uploadFormData = new FormData();
+      uploadFormData.append("file", new Blob([buffer], { type: "application/pdf" }));
+
+      const uploadResponse = await fetch("https://api.pdf.co/v1/file/upload", {
+        method: "POST",
+        headers: {
+          "x-api-key": apiKey,
+        },
+        body: uploadFormData,
+      });
+
+      if (!uploadResponse.ok) {
+        const uploadError = await uploadResponse.text();
+        console.error("PDF.co upload error:", uploadError);
+        throw new Error("Failed to upload PDF to PDF.co");
+      }
+
+      const uploadResult = await uploadResponse.json() as { url: string };
+      const fileUrl = uploadResult.url;
+
+      // Step 2: Convert uploaded file to text using the temporary URL
+      const textResponse = await fetch("https://api.pdf.co/v1/pdf/convert/to/text", {
         method: "POST",
         headers: {
           "x-api-key": apiKey,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          file: `data:application/pdf;base64,${base64PDF}`,
+          url: fileUrl,
         }),
       });
 
-      if (!response.ok) {
-        const error = await response.text();
-        console.error("PDF.co API error:", error);
+      if (!textResponse.ok) {
+        const textError = await textResponse.text();
+        console.error("PDF.co conversion error:", textError);
         throw new Error("Failed to extract text from PDF");
       }
 
-      const result = await response.json() as { body: string };
-      extractedText = result.body || "";
+      const textResult = await textResponse.json() as { body: string };
+      extractedText = textResult.body || "";
     } catch (extractError) {
       console.error("PDF extraction error:", extractError);
       throw new Error("Could not extract readable text from PDF. Ensure it is a valid text-based PDF.");
