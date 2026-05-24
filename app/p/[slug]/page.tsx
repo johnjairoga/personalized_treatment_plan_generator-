@@ -9,11 +9,11 @@ interface Props {
 export default async function PublicTreatmentPage({ params }: Props) {
   const awaitedParams = await params;
   const supabaseServer = getSupabaseServer();
-  const { data, error } = await supabaseServer
+  const { data, error } = (await supabaseServer
     .from("treatment_pages")
     .select("generated_html, patient_name")
     .eq("slug", awaitedParams.slug)
-    .single();
+    .single()) as { data: { generated_html: string; patient_name: string } | null; error: any };
 
   if (!data || error || !data.generated_html) {
     notFound();
@@ -30,11 +30,11 @@ export default async function PublicTreatmentPage({ params }: Props) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const awaitedParams = await params;
   const supabaseServer = getSupabaseServer();
-  const { data } = await supabaseServer
+  const { data } = (await supabaseServer
     .from("treatment_pages")
     .select("patient_name, treatment_overview")
     .eq("slug", awaitedParams.slug)
-    .single();
+    .single()) as { data: { patient_name: string; treatment_overview: string } | null };
 
   return {
     title: `${data?.patient_name} — Treatment Plan`,
