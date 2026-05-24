@@ -95,30 +95,38 @@ export async function POST(request: Request) {
       );
     }
 
-    // Extract PDF text
+    // Extract PDF text using PDF.co API
     const arrayBuffer = await file.arrayBuffer();
-    const uint8Array = new Uint8Array(arrayBuffer);
+    const buffer = Buffer.from(arrayBuffer);
+    const base64PDF = buffer.toString("base64");
 
     let extractedText = "";
 
     try {
-      // Use pdfjs-dist without canvas/workers for serverless compatibility
-      const pdfjs = await import("pdfjs-dist");
-      const { getDocument } = pdfjs;
-
-      const doc = await getDocument({ data: uint8Array }).promise;
-      const pages = [];
-
-      for (let i = 1; i <= doc.numPages; i++) {
-        const page = await doc.getPage(i);
-        const content = await page.getTextContent({ normalizeWhitespace: true });
-        const pageText = content.items
-          .map((item: any) => item.str || "")
-          .join(" ");
-        pages.push(pageText);
+      const apiKey = process.env.PDFCO_API_KEY;
+      if (!apiKey) {
+        throw new Error("PDF.co API key not configured");
       }
 
-      extractedText = pages.join("\n");
+      const response = await fetch("https://api.pdf.co/v1/pdf/convert/to/text", {
+        method: "POST",
+        headers: {
+          "x-api-key": apiKey,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          file: `data:application/pdf;base64,${base64PDF}`,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        console.error("PDF.co API error:", error);
+        throw new Error("Failed to extract text from PDF");
+      }
+
+      const result = await response.json() as { body: string };
+      extractedText = result.body || "";
     } catch (extractError) {
       console.error("PDF extraction error:", extractError);
       throw new Error("Could not extract readable text from PDF. Ensure it is a valid text-based PDF.");
