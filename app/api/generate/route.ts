@@ -102,12 +102,23 @@ export async function POST(request: Request) {
     let extractedText = "";
 
     try {
-      // Use dynamic require to avoid webpack bundling issues
-      const PDFParse = require("pdf-parse");
+      // Use pdfjs-dist without canvas/workers for serverless compatibility
+      const pdfjs = await import("pdfjs-dist");
+      const { getDocument } = pdfjs;
 
-      const parser = new PDFParse({ data: Buffer.from(uint8Array), max: 0 });
-      const pdfData = await parser.text();
-      extractedText = pdfData || "";
+      const doc = await getDocument({ data: uint8Array }).promise;
+      const pages = [];
+
+      for (let i = 1; i <= doc.numPages; i++) {
+        const page = await doc.getPage(i);
+        const content = await page.getTextContent({ normalizeWhitespace: true });
+        const pageText = content.items
+          .map((item: any) => item.str || "")
+          .join(" ");
+        pages.push(pageText);
+      }
+
+      extractedText = pages.join("\n");
     } catch (extractError) {
       console.error("PDF extraction error:", extractError);
       throw new Error("Could not extract readable text from PDF. Ensure it is a valid text-based PDF.");
