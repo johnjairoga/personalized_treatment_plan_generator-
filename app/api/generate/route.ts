@@ -102,7 +102,8 @@ export async function POST(request: Request) {
     let extractedText = "";
 
     try {
-      const { getDocument } = await import("pdfjs-dist/legacy/build/pdf");
+      const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+      const getDocument = pdfjsLib.default.getDocument;
 
       const pdf = await getDocument({ data: uint8Array }).promise;
       const pages = [];
