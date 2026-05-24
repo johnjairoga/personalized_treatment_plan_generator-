@@ -103,15 +103,17 @@ export async function POST(request: Request) {
 
     try {
       // Dynamically require pdf-parse to avoid build-time canvas issues
-      const pdfParse = require("pdf-parse/lib/pdf-parse.js") as (buffer: Buffer) => Promise<{ text: string }>;
+      const pdfParseModule = require("pdf-parse") as { default?: (buffer: Buffer) => Promise<{ text: string }>; (buffer: Buffer): Promise<{ text: string }> };
+      const pdfParse = pdfParseModule.default || pdfParseModule;
 
       const pdfData = await pdfParse(buffer);
       extractedText = pdfData.text || "";
 
-      console.log(`PDF extracted: ${extractedText.length} characters`);
+      console.log(`✓ PDF extracted: ${extractedText.length} characters`);
     } catch (extractError) {
-      console.error("PDF extraction error:", extractError);
-      throw new Error("Could not extract readable text from PDF. Ensure it is a valid text-based PDF.");
+      const errorMsg = extractError instanceof Error ? extractError.message : String(extractError);
+      console.error("❌ PDF extraction failed:", errorMsg);
+      throw new Error(`Could not extract PDF text. ${errorMsg}`);
     }
 
     if (!extractedText || extractedText.trim().length < 50) {
