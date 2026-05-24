@@ -69,6 +69,72 @@ export function getHtmlTemplate(): string {
       color: #FFB7B2;
     }
 
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 10px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: #292524;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(10px, 10px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(253, 252, 248, 0.98);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 80px;
+      z-index: 999;
+      gap: 0;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      padding: 20px 30px;
+      text-decoration: none;
+      color: #292524;
+      font-size: 18px;
+      border-bottom: 1px solid rgba(41, 37, 36, 0.1);
+      transition: background-color 0.3s;
+    }
+
+    .mobile-nav a:hover {
+      background-color: rgba(255, 183, 178, 0.1);
+      color: #FFB7B2;
+    }
+
     /* Hero Section */
     .hero {
       position: relative;
@@ -466,8 +532,30 @@ export function getHtmlTemplate(): string {
 
     /* Responsive */
     @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 15px 20px;
+        background: rgba(253, 252, 248, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-pill {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
       .hero {
-        padding: 60px 20px;
+        padding: 100px 20px 60px;
       }
 
       .hero h1 {
@@ -486,12 +574,6 @@ export function getHtmlTemplate(): string {
         transform: scale(1);
       }
 
-      .nav-pill {
-        gap: 15px;
-        padding: 10px 20px;
-        flex-direction: column;
-      }
-
       .therapy-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -506,7 +588,19 @@ export function getHtmlTemplate(): string {
       <a href="#therapy">IV Therapy</a>
       <a href="#faq">FAQ</a>
     </div>
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#plans">Treatment Plans</a>
+    <a href="#therapy">IV Therapy</a>
+    <a href="#faq">FAQ</a>
+  </div>
 
   <div class="container">
     <!-- Hero Section -->
@@ -607,6 +701,33 @@ export function getHtmlTemplate(): string {
   </footer>
 
   <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+      });
+
+      // Close menu when clicking on a link
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          mobileNav.classList.remove('active');
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('nav') && !event.target.closest('.mobile-nav')) {
+          hamburger.classList.remove('active');
+          mobileNav.classList.remove('active');
+        }
+      });
+    }
+
     // FAQ toggle
     document.querySelectorAll('.faq-question').forEach(question => {
       question.addEventListener('click', () => {
