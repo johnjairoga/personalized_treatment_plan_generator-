@@ -188,7 +188,7 @@ export async function POST(request: Request) {
           stripeLink = paymentLink.url;
           console.log(`✓ Payment Link Created: ${paymentLink.url}\n`);
         }
-        return { ...option, stripe_payment_link: stripeLink };
+        return { ...option, stripe_payment_link: stripeLink, recommended: option.recommended || false };
       })
     );
 
