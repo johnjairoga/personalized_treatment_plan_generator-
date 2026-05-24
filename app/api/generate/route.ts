@@ -102,8 +102,8 @@ export async function POST(request: Request) {
     let extractedText = "";
 
     try {
-      // Dynamically import pdf-parse to avoid build-time canvas issues
-      const pdfParse = (await import("pdf-parse/lib/pdf-parse.js")).default;
+      // Dynamically require pdf-parse to avoid build-time canvas issues
+      const pdfParse = require("pdf-parse/lib/pdf-parse.js") as (buffer: Buffer) => Promise<{ text: string }>;
 
       const pdfData = await pdfParse(buffer);
       extractedText = pdfData.text || "";
