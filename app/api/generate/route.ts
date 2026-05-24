@@ -102,8 +102,8 @@ export async function POST(request: Request) {
     let extractedText = "";
 
     try {
-      const pdfParse = await import("pdf-parse");
-      const PDFParse = pdfParse.default;
+      // Use dynamic require to avoid webpack bundling issues
+      const PDFParse = require("pdf-parse");
 
       const parser = new PDFParse({ data: Buffer.from(uint8Array), max: 0 });
       const pdfData = await parser.text();
