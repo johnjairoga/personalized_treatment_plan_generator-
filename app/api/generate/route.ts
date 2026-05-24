@@ -95,40 +95,20 @@ export async function POST(request: Request) {
       );
     }
 
-    // Extract PDF text using PDF.co API
+    // Extract PDF text using pdf-parse
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    const base64PDF = buffer.toString("base64");
 
     let extractedText = "";
 
     try {
-      const apiKey = process.env.PDFCO_API_KEY;
-      if (!apiKey) {
-        throw new Error("PDF.co API key not configured");
-      }
+      // Dynamically import pdf-parse to avoid build-time canvas issues
+      const pdfParse = (await import("pdf-parse/lib/pdf-parse.js")).default;
 
-      // Convert to text directly using base64 in request body
-      const textResponse = await fetch("https://api.pdf.co/v1/pdf/convert/to/text", {
-        method: "POST",
-        headers: {
-          "x-api-key": apiKey,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          file: `data:application/pdf;base64,${base64PDF}`,
-          convertTo: "text",
-        }),
-      });
+      const pdfData = await pdfParse(buffer);
+      extractedText = pdfData.text || "";
 
-      if (!textResponse.ok) {
-        const textError = await textResponse.text();
-        console.error("PDF.co API error:", textError);
-        throw new Error("Failed to extract text from PDF");
-      }
-
-      const textResult = await textResponse.json() as { body: string };
-      extractedText = textResult.body || "";
+      console.log(`PDF extracted: ${extractedText.length} characters`);
     } catch (extractError) {
       console.error("PDF extraction error:", extractError);
       throw new Error("Could not extract readable text from PDF. Ensure it is a valid text-based PDF.");

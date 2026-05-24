@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   turbopack: {},
   webpack: (config, { isServer }) => {
     if (isServer) {
-      config.externals = [...(config.externals || []), "canvas"];
+      config.externals = [...(config.externals || []), "canvas", "@napi-rs/canvas"];
     }
     return config;
   },
