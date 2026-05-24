@@ -152,6 +152,20 @@ export async function POST(request: Request) {
       );
     }
 
+    // Log extracted pricing for verification
+    console.log("=== PRICING EXTRACTION VERIFICATION ===");
+    extractedJson.treatment_options.forEach((option, idx) => {
+      console.log(`Option ${idx + 1}: "${option.title}"`);
+      console.log(`  Extracted Price (from PDF): ${option.pricing}`);
+      console.log(`  Type Check: ${typeof option.pricing}`);
+      if (option.pricing > 0) {
+        const priceInCents = Math.round(option.pricing * 100);
+        console.log(`  Stripe Cents (price × 100): ${priceInCents}`);
+        console.log(`  Stripe Amount (in USD): $${(priceInCents / 100).toFixed(2)}`);
+      }
+    });
+    console.log("=====================================\n");
+
     // Create Stripe payment links for each treatment option
     const stripe = getStripe();
 
@@ -165,12 +179,14 @@ export async function POST(request: Request) {
             unit_amount: priceInCents,
             product_data: { name: option.title },
           });
+          console.log(`✓ Stripe Price Created for "${option.title}": ${priceInCents} cents ($${(priceInCents / 100).toFixed(2)})`);
           const paymentLink = await stripe.paymentLinks.create({
             line_items: [{ price: price.id, quantity: 1 }],
             payment_method_types: ["card"],
             after_completion: { type: "redirect", redirect: { url: `${process.env.NEXT_PUBLIC_APP_URL}/?payment_success=true` } },
           });
           stripeLink = paymentLink.url;
+          console.log(`✓ Payment Link Created: ${paymentLink.url}\n`);
         }
         return { ...option, stripe_payment_link: stripeLink };
       })
@@ -191,6 +207,16 @@ export async function POST(request: Request) {
       ...extractedJson,
       treatment_options: treatmentOptionsWithStripe,
     };
+
+    // Summary: Verify all pricing values match
+    console.log("=== PAYMENT LINKS SUMMARY ===");
+    treatmentOptionsWithStripe.forEach((option, idx) => {
+      const originalPrice = extractedJson.treatment_options[idx].pricing;
+      console.log(`${idx + 1}. ${option.title}`);
+      console.log(`   Original extracted: ${originalPrice}`);
+      console.log(`   Payment link: ${option.stripe_payment_link ? "✓ Created" : "✗ Not created"}`);
+    });
+    console.log("=============================\n");
 
     // Generate slug and insert into Supabase
     const slug = generateSlug(extractedJson.patient_name);
