@@ -102,15 +102,19 @@ export async function POST(request: Request) {
     let extractedText = "";
 
     try {
-      const { PDFParse } = await import("pdf-parse");
-      const { fileURLToPath } = await import("url");
+      const { getDocument } = await import("pdfjs-dist/legacy/build/pdf");
 
-      const workerPath = fileURLToPath(new URL("../../../node_modules/pdf-parse/dist/pdf-parse/web/pdf.worker.mjs", import.meta.url));
-      (PDFParse as any).setWorker(`file://${workerPath}`);
+      const pdf = await getDocument({ data: uint8Array }).promise;
+      const pages = [];
 
-      const parser = new PDFParse({ data: Buffer.from(uint8Array) });
-      const pdfData = await parser.getText();
-      extractedText = pdfData.text || "";
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items.map((item: any) => item.str).join(" ");
+        pages.push(pageText);
+      }
+
+      extractedText = pages.join("\n");
     } catch (extractError) {
       console.error("PDF extraction error:", extractError);
       throw new Error("Could not extract readable text from PDF. Ensure it is a valid text-based PDF.");
