@@ -72,7 +72,7 @@ export default function UploadForm() {
             {...getRootProps()}
             className="p-12 text-center cursor-pointer transition-all duration-300 border-2 border-dashed rounded-3xl bg-white"
             style={{
-              borderColor: isDragActive ? "#FFB7B2" : "rgba(41, 37, 36, 0.2)",
+              borderColor: isDragActive ? "#261091" : "rgba(41, 37, 36, 0.2)",
               backgroundColor: isDragActive ? "rgba(255, 183, 178, 0.05)" : "white",
               boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.05)"
             }}
@@ -106,7 +106,7 @@ export default function UploadForm() {
             onClick={handleGenerate}
             disabled={!file}
             className="w-full px-8 py-4 rounded-full font-bold transition-transform text-white text-lg hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ backgroundColor: "#FFB7B2", boxShadow: "0 4px 20px -2px rgba(255, 183, 178, 0.3)" }}
+            style={{ backgroundColor: "#261091", boxShadow: "0 4px 20px -2px rgba(255, 183, 178, 0.3)" }}
           >
             Generate Treatment Page
           </button>
@@ -119,7 +119,7 @@ export default function UploadForm() {
           <div className="flex justify-center">
             <div className="relative w-16 h-16">
               <div className="absolute inset-0 rounded-full border-4 animate-spin"
-                style={{ borderColor: "rgba(41, 37, 36, 0.1)", borderTopColor: "#FFB7B2" }} />
+                style={{ borderColor: "rgba(41, 37, 36, 0.1)", borderTopColor: "#261091" }} />
             </div>
           </div>
           <div className="space-y-2">
@@ -139,7 +139,7 @@ export default function UploadForm() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <span className="text-2xl">✨</span>
-              <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: "#FFB7B2" }}>
+              <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: "#261091" }}>
                 Success!
               </p>
             </div>
@@ -185,7 +185,7 @@ export default function UploadForm() {
             <button
               onClick={handleOpenLink}
               className="w-full px-8 py-4 rounded-full font-bold transition-transform text-white hover:scale-105 active:scale-95"
-              style={{ backgroundColor: "#FFB7B2", boxShadow: "0 4px 20px -2px rgba(255, 183, 178, 0.3)" }}
+              style={{ backgroundColor: "#261091", boxShadow: "0 4px 20px -2px rgba(255, 183, 178, 0.3)" }}
             >
               Open Patient Page
             </button>

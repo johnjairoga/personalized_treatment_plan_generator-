@@ -13,14 +13,14 @@ export default function Home() {
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex justify-center mb-6">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#FFB7B2" }}>
+            <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#261091" }}>
               <div className="w-2 h-2 rounded-full bg-white" />
             </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold leading-tight" style={{ color: "#292524" }}>
             Treatment Plans
             <br />
-            <span style={{ fontFamily: "var(--font-reenie)", color: "#FFB7B2" }} className="text-4xl md:text-5xl">
+            <span style={{ fontFamily: "var(--font-reenie)", color: "#261091" }} className="text-4xl md:text-5xl">
               Made Simple
             </span>
           </h1>

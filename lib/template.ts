@@ -66,7 +66,7 @@ export function getHtmlTemplate(): string {
     }
 
     .nav-pill a:hover {
-      color: #FFB7B2;
+      color: #261091;
     }
 
     /* Hamburger Menu */
@@ -132,7 +132,7 @@ export function getHtmlTemplate(): string {
 
     .mobile-nav a:hover {
       background-color: rgba(255, 183, 178, 0.1);
-      color: #FFB7B2;
+      color: #261091;
     }
 
     /* Hero Section */
@@ -163,7 +163,7 @@ export function getHtmlTemplate(): string {
     }
 
     .hero-accent {
-      color: #FFB7B2;
+      color: #261091;
       font-family: 'Reenie Beanie', cursive;
       font-size: 1.1em;
       font-weight: 400;
@@ -201,7 +201,7 @@ export function getHtmlTemplate(): string {
     .trust-item-value {
       font-size: 24px;
       font-weight: 700;
-      color: #FFB7B2;
+      color: #261091;
     }
 
     /* Patient Profile */
@@ -229,7 +229,7 @@ export function getHtmlTemplate(): string {
       padding: 20px;
       background: #FDFCF8;
       border-radius: 12px;
-      border-left: 4px solid #FFB7B2;
+      border-left: 4px solid #261091;
     }
 
     .profile-label {
@@ -256,7 +256,7 @@ export function getHtmlTemplate(): string {
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #FFB7B2;
+      color: #261091;
       margin-bottom: 20px;
       font-weight: 600;
     }
@@ -292,7 +292,7 @@ export function getHtmlTemplate(): string {
     }
 
     .plan-card.featured {
-      border-color: #FFB7B2;
+      border-color: #261091;
       background: rgba(255, 183, 178, 0.02);
       position: relative;
       transform: scale(1.02);
@@ -303,7 +303,7 @@ export function getHtmlTemplate(): string {
       position: absolute;
       top: -12px;
       left: 20px;
-      background: #FFB7B2;
+      background: #261091;
       color: white;
       padding: 4px 12px;
       border-radius: 20px;
@@ -340,12 +340,12 @@ export function getHtmlTemplate(): string {
     .plan-price {
       font-size: 32px;
       font-weight: 700;
-      color: #FFB7B2;
+      color: #261091;
       margin-bottom: 30px;
     }
 
     .cta-button {
-      background: #FFB7B2;
+      background: #261091;
       color: white;
       border: none;
       padding: 16px 32px;
@@ -360,7 +360,7 @@ export function getHtmlTemplate(): string {
     }
 
     .cta-button:hover {
-      background: #FF9D98;
+      background: #261091;
       transform: scale(1.05);
     }
 
@@ -429,7 +429,7 @@ export function getHtmlTemplate(): string {
     }
 
     .faq-question:hover {
-      color: #FFB7B2;
+      color: #261091;
     }
 
     .faq-toggle {
@@ -513,7 +513,7 @@ export function getHtmlTemplate(): string {
     }
 
     .footer-links a {
-      color: #FFB7B2;
+      color: #261091;
       text-decoration: none;
       font-size: 14px;
       transition: color 0.3s;

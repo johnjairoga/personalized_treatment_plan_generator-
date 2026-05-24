@@ -11,7 +11,7 @@ const config: Config = {
         cream: "#FDFCF8",
         sage: "#E8EFE8",
         lavender: "#EFEDF4",
-        coral: "#FFB7B2",
+        coral: "#261091",
         dark: "#292524",
         muted: "#78716C",
       },
